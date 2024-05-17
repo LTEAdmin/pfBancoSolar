@@ -1,5 +1,6 @@
 import pg from 'pg';
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const {DB_PASSWORD, DB_USER, DB_HOST, DB_DATABASE, DB_PORT} = process.env;
 
@@ -21,6 +22,6 @@ const getDate = async () => {
     console.log(response.rows)
 };
 
-getDate();// la funcion getDate es la funcion uqe hemos creado que se debe invocar
+//getDate();// la funcion getDate es la funcion uqe hemos creado que se debe invocar
 
 export default dbase
