@@ -18,7 +18,7 @@ const getDate = async () => {
     const query = {
         text: 'SELECT now()'
     };
-    const response = await pool.query(query);
+    const response = await dbase.query(query);
     console.log(response.rows)
 };
 //ejemplo de insertar datos en tabla,
