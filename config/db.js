@@ -1,7 +1,8 @@
-import pg from 'pg';
-import dotenv from 'dotenv';
-dotenv.config();
-
+import pkg from 'pg';
+import "dotenv/config";
+//import dotenv from 'dotenv';
+//dotenv.config();
+const {Pool} = pkg;
 const {DB_PASSWORD, DB_USER, DB_HOST, DB_DATABASE, DB_PORT} = process.env;
 
 const config = {
@@ -13,15 +14,6 @@ const config = {
     allowExitOnIdle:true,
 };
 
-const dbase = new pg.Pool (config);
-const getDate = async () => {
-    const query = {
-        text: 'SELECT now()'
-    };
-    const response = await dbase.query(query);
-    console.log(response.rows)
-};
+const dbase = new Pool (config);
 
-//getDate();// la funcion getDate es la funcion uqe hemos creado que se debe invocar
-
-export default dbase
+export default dbase;

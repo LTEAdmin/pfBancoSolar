@@ -1,4 +1,4 @@
-import dbase from '../config/db.js';
+import dbase from "../config/db.js";
 
 export async function agregarUsuarioBD (datos) { 
     try {
@@ -15,3 +15,23 @@ export async function agregarUsuarioBD (datos) {
     };
 };
 
+export async function verUsuariosBD() { 
+    try { 
+        const sql = "SELECT * FROM usuarios";
+        const response = await dbase.query(sql);
+        return response.rows;
+    }
+    catch(error) { 
+        console.log (error);
+    };
+};
+
+/* const getDate = async () => {
+    const query = {
+        text: 'SELECT now()'
+    };
+    const response = await dbase.query(query);
+    console.log(response.rows)
+}; */
+
+//getDate();// la funcion getDate es la funcion que hemos creado que se debe invocar
