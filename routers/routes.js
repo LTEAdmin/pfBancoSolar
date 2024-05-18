@@ -1,9 +1,9 @@
 import express from 'express';
 import path from 'path';
 import {
-    agregarUsuarioBD,
-    verUsuariosBD
-} from '../database/queries.js';
+  agregarUsuarioBD,
+  verUsuariosBD,
+} from "../database/queries.js";
 
 const router = express.Router();
 const __dirname = import.meta.dirname;
@@ -20,7 +20,6 @@ router.post('/usuario', async (req, res) => {
         const datos = [nombre, balance];
 
         const response = await agregarUsuarioBD(datos);
-        console.log(response.rows);
         res.status(201).json(response.rows)[0];
     }
     catch (error) { 
@@ -38,8 +37,24 @@ router.get("/usuarios", async (req, res) => {
   }
 });
 
+//usuario PUT: Recibe los datos modificados de un usuario registrado y los actualiza.
+router.put("/usuario", async (req, res) => {
+    try {
+        const { id } = req.query;
+        const { nombre, balance } = req.body;
+        const datos = [id, nombre, balance];
+
+        const response = await modificarUsuarioBD(datos);
+        res.status(201).send(response)
+    }
+    catch (error) {
+    res.status(500).send(error);
+    }     
+})
+
 /*  Rutas que se deben crear
-● /usuario PUT: Recibe los datos modificados de un usuario registrado y los actualiza. 
+●  
+/usuario PUT: Recibe los datos modificados de un usuario registrado y los actualiza.
 ● /usuario DELETE: Recibe el id de un usuario registrado y lo elimina . 
 ● /transferencia POST: Recibe los datos para realizar una nueva transferencia. Se 
 debe ocupar una transacción SQL en la consulta a la base de datos. 

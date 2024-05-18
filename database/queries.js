@@ -7,7 +7,7 @@ export async function agregarUsuarioBD (datos) {
             values: datos,
         }
         const response = await dbase.query(sql);
-        console.log(response.rows[0]);
+        //console.log(response.rows[0]);
         return response.rows[0];
     }
     catch (error) {
@@ -26,6 +26,26 @@ export async function verUsuariosBD() {
     };
 };
 
+export async function modificarUsuarioBD (datos) {
+    try {
+        const sql = {
+            text: 'UPDATE usuarios SET nombre = $2,  balance = $3 WHERE id = $1 RETURNING *',  
+            values: datos
+        }
+        const response = await dbase.query(sql);
+        //se valida que exista el usuario y este fue modifica, si no entrega mensaje que no se encontroel usuario 
+        if (response.rowCount === 0) {
+            throw new Error('No se modificó el usuario' + " " + datos[0]);
+        }
+        else { 
+            result.rows[0];
+        }
+        return response.rows[0];
+    }
+    catch (error) {
+        console.log(error);
+    };
+}
 /* const getDate = async () => {
     const query = {
         text: 'SELECT now()'
