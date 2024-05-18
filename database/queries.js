@@ -26,11 +26,11 @@ export async function verUsuariosBD() {
     };
 };
 
-export async function modificarUsuarioBD (datos) {
+export async function modificarUsuarioBD (nombre, balance, id) {
     try {
         const sql = {
             text: 'UPDATE usuarios SET nombre = $2,  balance = $3 WHERE id = $1 RETURNING *',  
-            values: datos
+            values: [nombre, balance,id]
         }
         const response = await dbase.query(sql);
         //se valida que exista el usuario y este fue modifica, si no entrega mensaje que no se encontroel usuario 

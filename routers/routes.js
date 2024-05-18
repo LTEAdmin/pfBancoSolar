@@ -42,9 +42,8 @@ router.put("/usuario", async (req, res) => {
     try {
         const { id } = req.query;
         const { nombre, balance } = req.body;
-        const datos = [id, nombre, balance];
-
-        const response = await modificarUsuarioBD(datos);
+        
+        const response = await modificarUsuarioBD(nombre, balance, id);
         res.status(201).send(response)
     }
     catch (error) {
